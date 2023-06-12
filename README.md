@@ -1,5 +1,32 @@
 # natural-selection-autopair.fish
 
+A [fish shell](https://fishshell.com/) plugin that makes selection as natural as a text editor. We have taken code and motivation from [natural-selection](https://github.com/daleeidd/natural-selection) and [autopair.fish](https://github.com/jorgebucaran/autopair.fish). 
+
+## Features
+
+- Ends selection on cursor move
+- Replaces selection on input
+- autopair.fish like functionality
+- Clipboard integration
+
+## Requirements
+
+- Fish 3.6.0 or later
+
+## Installation
+
+I suggest using [fundle](https://github.com/danhper/fundle)
+
+Add
+
+```
+fundle plugin 'blueray453/natural-selection-autopair.fish'
+```
+
+to your `config.fish`, reload your shell and run `fundle install`.
+
+## Usage
+
 Please check the function names. They are self explanatory. Use `fish_key_reader` to find keys and bind them to the functions.
 
 Here is my sample keybindings.
@@ -79,7 +106,7 @@ printf "%s\n" $autopair_pairs | while read --local left right --delimiter ""
     end
 end
 ```
-## caveat
+## Caveat
 
 you might have noticed that i have used `end-selection` before several keybindings, otherwise the selection will continue. So, if you find that after some key press the selection continues, then add `end-selection` like:
 
@@ -92,80 +119,17 @@ However, hopefully `bind '' kill-selection end-selection self-insert` will handl
 
 In the functions, you will find some repetation. This is intentional. This is so that you can read each file autonomously (and hopefully send us some pull requests).
 
-## autopair like functionality
+## Frequently Asked Questions
 
-Automatically insert, erase, and skip matching pairs as you type in the command-line: `()`, `[]`, `{}`, `""`, and `''`. E.g., pressing `(` inserts `()` and positions the cursor in between the parentheses. Hopefully.
+### Why are you not providing bindings on install?
+Conflicts mainly. It is advantageous to both parties for consumers to set their own bindings.
 
-- Insert matching pairs.
+### Is there a performance impact?
+I cannot quantify the performance impact at this stage. I do not notice it, but I might not be as sensitive as others.
 
-  ```console
-  $ echo ⎢ # Let's say ⎪ is the cursor!
-  ```
-
-  <kbd>"</kbd> 🥊
-
-  ```console
-  $ echo "⎪"
-  ```
-
-- Erase pairs on backspace:
-
-  ```console
-  $ echo "Hey⎪"
-  ```
-
-  <kbd>Backspace</kbd> 🥊🥊🥊
-
-  ```console
-  $ echo "⎪"
-  ```
-
-  <kbd>Backspace</kbd> 🥊
-
-  ```console
-  $ echo ⎪
-  ```
-
-- Skip over matched pairs:
-
-  ```console
-  $ echo "Hey⎪"
-  ```
-
-  <kbd>"</kbd> 🥊
-
-  ```console
-  $ echo "Hey"⎪
-  ```
-
-- Gracefully handle <kbd>Tab</kbd> completions for variables while inside double quotes.
-
-  ```console
-  $ echo "$fish_color_⎪"
-  ```
-
-  <kbd>Tab</kbd> 🥊
-
-  ```console
-  $ echo "$fish_color_⎪
-  "$fish_color_autosuggestion   (Variable: '555' 'brblack')
-  "$fish_color_cancel           (Variable: -r)
-  "$fish_color_command          (Variable: blue)
-  "$fish_color_comment          (Variable: red)
-  ...
-  ```
-
-## How can I contribute
+## How can we contribute
 
 Please make a video / gif like https://github.com/PatrickF1/fzf.fish and update the readme.
-
-## Installation
-
-Install with [Fisher](https://github.com/jorgebucaran/fisher):
-
-```console
-fisher install blueray453/natural-selection-autopair.fish
-```
 
 ## License
 
