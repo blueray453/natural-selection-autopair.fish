@@ -1,9 +1,20 @@
 function _autopair_backspace
-    set --local index (commandline --cursor)
-    set --local buffer (commandline)
+    set -l index (commandline --cursor)
+    set -l buffer (commandline)
+    set -l has_selection (commandline --selection-start)
 
-    test $index -ge 1 &&
-        contains -- (string sub --start=$index --length=2 -- "$buffer") $autopair_pairs &&
+    if test -n "$has_selection"
+        commandline -f kill-selection
+    else
+
+    if contains (string sub --start=$index --length=2 -- "$buffer") $autopair_pairs
         commandline --function delete-char
+    end
+
     commandline --function backward-delete-char
+    end
 end
+
+
+
+
