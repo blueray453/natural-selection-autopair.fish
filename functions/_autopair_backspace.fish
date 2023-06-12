@@ -7,7 +7,7 @@ function _autopair_backspace
         commandline -f kill-selection
     else
 
-    if contains (string sub --start=$index --length=2 -- "$buffer") $autopair_pairs
+    if test $index -ge 1 && contains (string sub --start=$index --length=2 -- "$buffer") $autopair_pairs
         commandline --function delete-char
     end
 
