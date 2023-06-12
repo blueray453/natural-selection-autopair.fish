@@ -6,12 +6,15 @@ function _autopair_backspace
     if test -n "$has_selection"
         commandline -f kill-selection
     else
-
-    if test $index -ge 1 && contains (string sub --start=$index --length=2 -- "$buffer") $autopair_pairs
+    test $index -ge 1 &&
+        contains -- (string sub --start=$index --length=2 -- "$buffer") $autopair_pairs &&
         commandline --function delete-char
-    end
-
     commandline --function backward-delete-char
+    # if test $index -ge 1 && contains (string sub --start=$index --length=2 -- "$buffer") $autopair_pairs
+    #     commandline --function delete-char
+    # end
+
+    # commandline --function backward-delete-char
     end
 end
 
